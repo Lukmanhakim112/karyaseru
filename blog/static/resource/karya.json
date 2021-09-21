@@ -1,0 +1,53 @@
+{
+    "karya": [
+        {   
+            "id" : 1,
+            "title" : "Website Perpustakaan",
+            "creator" : "Zidan M. Daffa",
+            "deskripsi" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Web Development",
+            "image" : "./asset/img/web-perpus.jpg"
+        },
+        {
+            "id" : 2,
+            "title" : "Door lock RFID",
+            "creator" : "M. Iqbal",
+            "deskripsi" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Internet of Things",
+            "image" : "./asset/img/doorlock.jpg"
+        },
+        {
+            "id" : 3,
+            "title" : "Perakitan Komputer",
+            "creator" : "Refaya Jihad",
+            "desc" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Komputer",
+            "image" : "./asset/img/komputer.jpg"
+        },
+        {
+            "id" : 4,
+            "title" : "Penyambungan kabel FO",
+            "creator" : "Refaya Jihad",
+            "deskripsi" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Optic",
+            "image" : "./asset/img/optic.jpg"
+        },
+        {
+            "id" : 5,
+            "title" : "Sensor deteksi Kebakaran",
+            "creator" : "Humam",
+            "deskripsi" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Internet of Things",
+            "image" : "./asset/img/sensor.jpg"
+        },
+        {
+            "id" : 6,
+            "title" : "Website profil Sekolah",
+            "creator" : "Erlangga",
+            "deskripsi" : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam consequatur dolore dicta repellat quaerat facilis! Quia labore inventore cum quod, laboriosam similique odit vitae corporis! Beatae doloribus cum officia voluptatem, voluptatibus accusamus ad? Voluptatibus nulla odio amet nihil placeat deserunt a praesentium laudantium iusto! Odit alias nemo dolorum! Esse magnam fugiat aspernatur maxime architecto.",
+            "category" : "Web Development",
+            "image" : "./asset/img/profile.jpg"
+        }
+        
+    ]
+}

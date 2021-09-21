@@ -1,0 +1,11 @@
+#+TITLE: Karyaseru
+
+
+Karyaseru is a web blog for showing [[https://smktelkom-bdg.sch.id][Vocational High School Telkom Bandung]] student projects.
+
+* Notes
+** Student dont need to login, for posting a post
+** Standar CRUD stuff
+** Listing all the posts
+** invitation link for becoming a new student
+** Every post need approval administrator

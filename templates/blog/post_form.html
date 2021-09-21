@@ -1,0 +1,36 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block navbar %}
+{% endblock navbar %}
+{% block header %}{% endblock header %}
+{% block style %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style type="text/css" media="screen">
+     .asteriskField {
+         color: red;
+         margin-left: 0.25rem;
+     }
+    </style>
+{% endblock style %}
+{% block main %}
+    <section class="bg-white mx-5 mb-3 mt-0 p-3 rounded border">
+        <img class="img-fluid" src="{% static 'blog/img/logo-nav.png' %}" alt="Logo smk telkom bandung" />
+        <blockquote class="blockquote mt-3">
+            <p class="h4">Bagikan Karyamu, dan Berikan Inspirasi Bagi Semua.</p>
+        </blockquote>
+    </section>
+
+    <section class="mx-5 mt-0 mb-5 p-1">
+        <form method="POST" enctype="multipart/form-data" action="">
+            {% crispy form %}
+        </form>
+    </section>
+{% endblock main %}
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $('.selectmultiple').selectpicker();
+    </script>
+{% endblock js %}

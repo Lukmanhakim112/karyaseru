@@ -1,0 +1,48 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% block header %}{% endblock header %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'blog/css/blog-list.css' %}" type="text/css" media="screen" />
+{% endblock style %}
+{% block main %}
+
+    <div class="row py-5">
+        <div class="col-9">
+
+            {% for post in posts_list %}
+            <div class="d-flex p-3 mb-3 border rounded-xl">
+                <div class="me-4">
+                    <img src="https://zidandff.github.io/karyaseru/asset/img/doorlock.jpg" width="300px" height="230px" alt="image banner" class="rounded-xl" />
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="category">
+                        <h6 class=""><span class="bg-warning bg-opacity-75 p-2 rounded">{{ post.category }}</span></h6>
+                    </div>
+
+                    <h2 class="my-3 font-title fw-bold"><a href="" class="link-danger text-decoration-none">
+                        Perjalanan Ku
+                    </a></h2>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><span class="text-muted">by:</span>
+                            <a class="link-danger text-decoration-none" href="">{{ post.author|title  }}</a>
+                        </li>
+                        <li class="list-inline-item text-muted">3 Desember 2020</li>
+                        <li class="list-inline-item text-muted">But they're displayed inline.</li>
+                    </ul>
+                    <p>
+                        Turpis cursus in hac habitasse platea dictumst quisque sagittis, purus sit amet. Cursus euismod quis viverra nibh cras pulvinar mattis nunc, sed blandit libero volutpat sed cras orn...
+                    </p>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="col">
+            <div class="border rounded-xl">
+                sad
+            </div>
+        </div>
+    </div>
+
+{% endblock main %}

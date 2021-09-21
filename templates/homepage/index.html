@@ -1,0 +1,80 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+{% block main %}
+    <!-- Section Tentang kami -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-5 mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="{% static 'blog/img/MM.png' %}" class="img-fit" alt="Tentang kami">
+                </div>
+
+                <div class="col-lg-7">
+                    <h1 class="h2 fw-bold" data-aos="fade-down">Apasih <span class="text-red">#KARYASERU</span> itu?</h1>
+                    <p class="paragraf pt-2" data-aos="fade-right" data-aos-delay="400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus suscipit ullamcorper. Sed ipsum ante, tincidunt vitae fermentum in, commodo tincidunt ante. Cras vitae leo viverra, egestas ex nec, viverra quam. Donec sodales tempor </p>
+
+                    <!-- kategori karya -->
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/iot.svg' %}" class="me-2 my-4" alt="Karya IoT">
+                                <h5 class="mb-0 fs-5">Internet of Things</h5>
+                            </div>
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/web.svg' %}" class="me-2 my-4" alt="Karya web">
+                                <h5 class="mb-0 fs-5">Web Development</h5>
+                            </div>
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/design.svg' %}" class="me-2 my-4" alt="Karya design">
+                                <h5 class="mb-0 fs-5">Design</h5>
+                            </div>
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/optic.svg' %}" class="me-2 my-4" alt="Karya opctic">
+                                <h5 class="mb-0 fs-5">Optic</h5>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/photography.svg' %}" class="me-2 my-4" alt="Karya photo">
+                                <h5 class="mb-0 fs-5">Photography</h5>
+                            </div>
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/videography.svg' %}" class="me-2 my-4" alt="Karya video">
+                                <h5 class="mb-0 fs-5">Videography</h5>
+                            </div>
+                            <div class="d-flex align-items-center" data-aos="fade-up">
+                                <img src="{% static 'blog/img/icon/komputer.svg' %}" class="me-2 my-4" alt="Karya komputer">
+                                <h5 class="mb-0 fs-5">Komputer</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Showcase -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <h1 class="fw-bold text-center" data-aos="zoom-in"><span class="text-red">#KARYASERU</span> Showcase</h1>
+            <p class="paragraf text-center mt-5" data-aos="zoom-in">Filter by Kategori:</p>
+            <div class="wrapper-kategori" data-aos="fade-up">
+                <span class="kategori filter-active" data-filter="all">Semua</span>
+                <span class="kategori" data-filter="web">Web Development</span>
+                <span class="kategori" data-filter="iot">Internet of Things</span>
+                <span class="kategori" data-filter="design">Design</span>
+                <span class="kategori" data-filter="photo">Photography</span>
+                <span class="kategori" data-filter="video">Videography</span>
+                <span class="kategori" data-filter="komputer">Komputer</span>
+                <span class="kategori" data-filter="optic">Optic</span>
+            </div>
+
+            <!-- card karya -->
+            <div class="row container-karya">
+
+            </div>
+            <!-- End card karya -->
+        </div>
+    </section>
+{% endblock main %}
