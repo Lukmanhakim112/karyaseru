@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from django.core.exceptions import PermissionDenied
 
 from .models import Post
@@ -32,6 +32,12 @@ class PostList(ListView):
     model = Post
     template_name = 'blog/all-post.html'
     context_object_name = 'posts_list'
+    paginate_by = 7
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rand_post'] = self.model.objects.order_by('?')[:5]
+        return context
 
 class PostCreateView(CreateView):
     model = Post
@@ -53,3 +59,8 @@ class PostCreateView(CreateView):
             raise PermissionDenied
 
         return super().form_valid(form)
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post-detail.html'
+    context_object_name = 'post'
