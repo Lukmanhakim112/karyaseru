@@ -15,13 +15,14 @@ class Category(models.Model):
         return self.category
 
 class Post(models.Model):
+    verfied = models.BooleanField('Terverivikasi', default=False)
     title = models.CharField('Judul Post (Karya)', max_length=70, db_index=True)
-    author = models.CharField('Author', max_length=100)
+    author = models.CharField('Penulis', max_length=100)
     slug = models.SlugField()
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category, verbose_name="Kategori")
 
     image = models.ImageField('Gambar/Photo', upload_to='post/images/')
-    content = QuillField(null=True)
+    content = QuillField(verbose_name="Konten/Tulisan", null=True)
     ig_account = models.CharField('Akun Instagram', max_length=100, help_text='Isi dengan link instagram author.')
 
     updated_at = models.DateField(default=timezone.now)
@@ -30,12 +31,12 @@ class Post(models.Model):
         return self.title
 
     def _generate_slug(self):
-        max_length = self._meta.get_field('slug').max_length
         value = self.title
         slug_candidate = slugify(value, allow_unicode=True)
 
         # add number to slug, if the slug already exist
         for i in itertools.count(1):
+            # pylint: disable=maybe-no-member
             if not Post.objects.filter(slug=slug_candidate).exists():
                 break
             slug_candidate = f'{slug_candidate}-{i}'

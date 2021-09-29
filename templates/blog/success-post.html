@@ -4,12 +4,16 @@
 {% endblock navbar %}
 {% block header %}{% endblock header %}
 {% block main %}
-    <section class="bg-white mx-5 mt-5 mb-3 p-3 rounded border">
-        <img class="img-fluid" src="{% static 'blog/img/logo-nav.png' %}" alt="Logo smk telkom bandung" />
-        <blockquote class="blockquote mt-3">
-            <p class="h4">Berhasil Mengunggah Karya! Silahkan Menunggu Persetujuan Admin...</p>
-        </blockquote>
-    </section>
+
+    <div class="card">
+        <div class="card-header">
+            Karyaseru | SMK Telkom Bandung
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Berhasil Mengunggah Karya!</h5>
+            <p class="card-text">Menunggu karya diverifikasi oleh Admin, untuk tambil di website.</p>
+        </div>
+    </div>
 
 {% endblock main %}
 {% block js %}

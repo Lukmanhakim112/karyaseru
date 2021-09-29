@@ -1,3 +1,4 @@
+# pylint: disable=maybe-no-member
 import requests
 
 from django.shortcuts import render
@@ -16,6 +17,11 @@ def index(request):
     return render(request, 'blog/index.html')
 
 def success_post(request):
+
+    # check if the user success post an article
+    if not request.session.get('success_post'):
+        raise PermissionDenied
+
     return render(request, 'blog/success-post.html')
 
 def verify_recaptcha(siteverify):
@@ -34,10 +40,26 @@ class PostList(ListView):
     context_object_name = 'posts_list'
     paginate_by = 7
 
+    def get_queryset(self):
+        if self.request.GET.get('search'):
+            return self.model.objects.filter(title__icontains=self.request.GET['search'], verfied=True)
+        else:
+            return self.model.objects.filter(verfied=True)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rand_post'] = self.model.objects.order_by('?')[:5]
+        context['rand_post'] = self.model.objects.filter(verfied=True).order_by('?')[:5]
         return context
+
+class CategoryPostList(PostList):
+
+    def get_queryset(self):
+        return self.model.objects.filter(category=self.kwargs['category'], verfied=True)
+
+class AuthorPostList(PostList):
+
+    def get_queryset(self):
+        return self.model.objects.filter(author__icontains=self.kwargs['author'], verfied=True)
 
 class PostCreateView(CreateView):
     model = Post
@@ -58,9 +80,19 @@ class PostCreateView(CreateView):
         if not siteverify.get('success'):
             raise PermissionDenied
 
+        # Mark for seeing the success page
+        self.request.session['success_post'] = True
+        self.request.session.set_expiry(7)
+
         return super().form_valid(form)
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post-detail.html'
     context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # pylint: disable=maybe-no-member
+        context['rand_post'] = self.model.objects.order_by('?')[:5]
+        return context   

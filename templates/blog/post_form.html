@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block navbar %}
 {% endblock navbar %}
+{% block mainstyle %}{% endblock mainstyle %}
 {% block header %}{% endblock header %}
 {% block style %}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -12,17 +13,33 @@
          color: red;
          margin-left: 0.25rem;
      }
+    legend {
+        display: inline !important;
+        float: none;
+        font-family: 'Source Sans Pro', sans-serif;
+        width: auto !important;
+        max-width: 100%;
+        padding: 0 0.5rem !important;
+        margin-bottom: .5rem;
+        font-size: 1.75rem;
+        line-height: inherit;
+        color: inherit;
+        white-space: normal;
+     }
     </style>
 {% endblock style %}
 {% block main %}
-    <section class="bg-white mx-5 mb-3 mt-0 p-3 rounded border">
-        <img class="img-fluid" src="{% static 'blog/img/logo-nav.png' %}" alt="Logo smk telkom bandung" />
-        <blockquote class="blockquote mt-3">
-            <p class="h4">Bagikan Karyamu, dan Berikan Inspirasi Bagi Semua.</p>
-        </blockquote>
-    </section>
+    <section class="mx-5 mt-3 mb-5 p-1">
 
-    <section class="mx-5 mt-0 mb-5 p-1">
+        <div class="row">
+            <div class="col-12 m-2 border rounded p-3">
+                <img class="img-fluid" src="{% static 'blog/img/logo-nav.png' %}" alt="Logo smk telkom bandung" />
+                <blockquote class="blockquote mt-3">
+                <p class="h4">Bagikan Karyamu, dan Berikan Inspirasi Bagi Semua.</p>
+                </blockquote>
+            </div>
+        </div>
+
         <form method="POST" enctype="multipart/form-data" action="">
             {% crispy form %}
         </form>

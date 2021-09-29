@@ -26,7 +26,7 @@
                     </a></h2>
                     <ul class="list-inline">
                         <li class="list-inline-item"><span class="text-muted">by:</span>
-                            <a class="link-danger text-decoration-none" href="">{{ post.author|title  }}</a>
+                            <a class="link-danger text-decoration-none" href="{% url 'post-author' post.author %}">{{ post.author|title  }}</a>
                         </li>
                         {% comment %} <li class="list-inline-item text-muted">&bull;</li> {% endcomment %}
                         <li class="list-inline-item text-muted">
@@ -52,9 +52,9 @@
         <div class="col-12 col-md-3">
             <div class="border rounded-xl p-3 mb-3">
                 <h5 class="font-title mb-4 mt-3"><b>Cari inspirasi?</b></h5>
-                <form action="GET">
+                <form action="{% url 'post' %}" method="GET">
                     <div class="input-group my-3">
-                        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <span class="input-group-text" id="basic-addon2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>

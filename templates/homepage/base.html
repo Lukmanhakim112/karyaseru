@@ -38,9 +38,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ms-auto">
-                        <a class="nav-link me-4" data-scroll href="#home">Beranda</a>
-                        <a class="nav-link me-4 " data-scroll href="#about">Tentang Kami</a>
-                        <a class="nav-link me-4" data-scroll href="#showcase">Showcase</a>
+                        <a class="nav-link me-4" data-scroll href="{% url 'homepage' %}">Beranda</a>
+                        <a class="nav-link me-4 " data-scroll href="{% url 'homepage' %}#about">Tentang Kami</a>
+                        <a class="nav-link me-4" data-scroll href="{% url 'homepage' %}#showcase">Showcase</a>
+                        <a class="nav-link me-4" href="{% url 'post' %}">Semua Post</a>
                         <a href="{% url 'post-create' %}" class="btn my-button align-self-start mt-4 mt-lg-0">Posting</a>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
         {% endblock header %}
 
         <!-- Main section -->
-        <main style="margin-top: 15vh">
+        <main style="{% block mainstyle %}margin-top: 15vh{% endblock mainstyle %}">
             <div class="container">
                 {% block main %}{% endblock main %}
             </div>
@@ -144,11 +145,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    {% block js %}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{% static 'blog/js/main.js' %}"></script>
     <script src="{% static 'blog/js/getData.js' %}"></script>
-    {% block js %}
     {% endblock js %}
 </body>
 </html>
