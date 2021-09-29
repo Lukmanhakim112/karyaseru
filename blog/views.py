@@ -42,24 +42,24 @@ class PostList(ListView):
 
     def get_queryset(self):
         if self.request.GET.get('search'):
-            return self.model.objects.filter(title__icontains=self.request.GET['search'], verfied=True)
+            return self.model.objects.filter(title__icontains=self.request.GET['search'], verified=True)
         else:
-            return self.model.objects.filter(verfied=True)
+            return self.model.objects.filter(verified=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rand_post'] = self.model.objects.filter(verfied=True).order_by('?')[:5]
+        context['rand_post'] = self.model.objects.filter(verified=True).order_by('?')[:5]
         return context
 
 class CategoryPostList(PostList):
 
     def get_queryset(self):
-        return self.model.objects.filter(category=self.kwargs['category'], verfied=True)
+        return self.model.objects.filter(category=self.kwargs['category'], verified=True)
 
 class AuthorPostList(PostList):
 
     def get_queryset(self):
-        return self.model.objects.filter(author__icontains=self.kwargs['author'], verfied=True)
+        return self.model.objects.filter(author__icontains=self.kwargs['author'], verified=True)
 
 class PostCreateView(CreateView):
     model = Post
