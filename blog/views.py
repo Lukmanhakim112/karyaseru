@@ -82,7 +82,7 @@ class PostCreateView(CreateView):
 
         # Mark for seeing the success page
         self.request.session['success_post'] = True
-        self.request.session.set_expiry(7)
+        self.request.session.set_expiry(60)
 
         return super().form_valid(form)
 
