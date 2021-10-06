@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/smkbandung/python_app/karyaseru/
+    - /bin/cp -r * $DEPLOYPATH
+    # - /bin/cp -r blog $DEPLOYPATH
+    # - /bin/cp -r karyaseru $DEPLOYPATH
+    # - /bin/cp -r templates $DEPLOYPATH
+    # - /bin/cp -r templates $DEPLOYPATH
+    # - /bin/cp -r requirements.txt $DEPLOYPATH
+    # - source /home/smkbandung/virtualenv/python_app/primaseru/3.7/bin/activate && cd /home/smkbandung/python_app/primaseru
+    # - ./manage.py collectstatic --noinput
+    # - ./manage.py migrate
