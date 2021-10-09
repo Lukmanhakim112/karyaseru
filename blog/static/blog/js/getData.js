@@ -7,7 +7,7 @@ btnFilter.forEach( btn => {
             btnFilter.forEach( btn => btn.classList.remove("filter-active") )
             this.classList.add("filter-active")
     
-            const karya = await getDataKarya(btn.textContent)
+            const karya = await getDataKarya(btn.getAttribute('data-filter'))
             const strKategori = this.innerText.toLowerCase()
             filterKarya(karya, strKategori)
         }
@@ -51,7 +51,7 @@ function filterKarya(dataKarya, filterText){
 function displayError(error){
     const containerCard = document.querySelector('.container-karya')
     containerCard.innerHTML = `<div class="col-md-6 mx-auto error-img">
-        <img src="/asset/img/404.svg" class="mt-5" alt="error ${error}" width="100%">
+        <img src="${window.location.origin}/static/blog/img/404.svg" class="mt-5" alt="error ${error}" width="100%">
         <h1 class="text-center">${error}</h1>
     </div>`
 }

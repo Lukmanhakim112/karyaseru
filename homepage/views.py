@@ -8,8 +8,9 @@ def index(request):
     # pylint: disable=maybe-no-member
     post = Post.objects.all()[:3]
     homepage = Homepage.objects.all().first()
+    categories = Category.objects.all()
 
-    return render(request, 'homepage/index.html', {'post': post, 'homepage': homepage})
+    return render(request, 'homepage/index.html', {'post': post, 'homepage': homepage, 'categories': categories})
 
 def get_post_by_category(request, category):
 
@@ -17,7 +18,7 @@ def get_post_by_category(request, category):
     if category == 'all' or category == 'Semua':
         post = list(Post.objects.filter(verified=True)[:3].values('title', 'author', 'image', 'ig_account', 'category__category', 'slug'))
     elif category:
-        cate = get_object_or_404(Category, category=category)
+        cate = get_object_or_404(Category, slug=category)
         post = list(Post.objects.filter(category=cate, verified=True)[:3].values('title', 'author', 'image', 'ig_account', 'category__category', 'slug'))
 
     return JsonResponse({'post': post})

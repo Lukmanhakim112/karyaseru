@@ -26,3 +26,4 @@ class PostAdmin(admin.ModelAdmin):
     actions = [make_verify]
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Category)

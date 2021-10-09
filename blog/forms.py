@@ -34,8 +34,8 @@ class PostForm(forms.ModelForm):
 
                     Div(
                         HTML('<div class="g-recaptcha" data-sitekey="6LegB3kcAAAAAC8G65G-cTAjArgI7xTJgL_OpNNH"></div>'),
-                        HTML('<button type="submit" class="btn my-button align-self-center ms-4">Unggah Karya!</button>'),
-                        css_class='mt-4 d-flex align-items-center'
+                        HTML('<button type="submit" class="btn my-button align-self-center ms-4 mt-4">Unggah Karya!</button>'),
+                        css_class='mt-4 d-flex flex-column flex-md-row align-items-center '
                     ),
                     css_class='col-12 border-danger m-2 p-3 border rounded'
                 ),
