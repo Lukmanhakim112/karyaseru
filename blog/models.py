@@ -1,4 +1,5 @@
 import itertools
+from urllib.parse import urlparse, parse_qs
 
 from django.db import models
 from django.utils import timezone
@@ -44,6 +45,8 @@ class Post(models.Model):
     category = models.ManyToManyField(Category, verbose_name="Kategori")
 
     image = models.ImageField('Gambar/Photo')
+    video = models.URLField('Link Video', null=True, blank=True, help_text="Masukan link video jika ada, untuk disematkan di artikel.")
+    v_yt_id = models.CharField(max_length=30, null=True, blank=True)
     content = QuillField(verbose_name="Konten/Tulisan", null=True)
     ig_account = models.CharField('Link Akun Instagram', max_length=100, help_text='Isi dengan link instagram penulis.')
 
@@ -65,9 +68,24 @@ class Post(models.Model):
 
         self.slug = slug_candidate
 
+    def _trim_yoututbe_id(self):
+        video_url = self.video
+         
+        try:
+            url_parsed = urlparse(video_url)
+            url_parsed = parse_qs(url_parsed.query)
+            return url_parsed["v"][0]
+        except KeyError:
+            # pylint: disable=maybe-no-member
+            url = video_url.split("/")
+            return url[3]
+
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self._generate_slug()
+
+        self.v_yt_id = self._trim_yoututbe_id()
 
         super(Post, self).save(*args, **kwargs)
         # pylint: disable=maybe-no-member

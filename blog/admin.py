@@ -18,7 +18,7 @@ class PostAdmin(admin.ModelAdmin):
     fields = (
         ('title', 'verified'),
         ('author', 'ig_account'),
-        'category', 'image', 'content'
+        'category', 'image', 'video', 'content'
     )
     list_display = ('title', 'author', 'verified')
     list_filter = ('verified', 'category')

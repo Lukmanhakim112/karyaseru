@@ -38,9 +38,14 @@
             <img src="{{ post.image.url }}" alt="Banner image post" class="img-fluid">
         </div>
 
+        <div class="mb-5 ratio ratio-16x9">
+            <iframe class="" src="https://www.youtube.com/embed/{{ post.v_yt_id }}" allowfullscreen></iframe>
+        </div>
+
         <div class="" id="post-article">
             {{ post.content.html|safe }}
         </div>
+
 
         <div class="mt-5">
             <h5 class="font-title mb-4"><b>Baca inspirasi lain:</b></h5>
