@@ -2,7 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/smkbandung/python_app/karyaseru/
-    # - /bin/cp -r * $DEPLOYPATH
     - /bin/cp -r blog $DEPLOYPATH
     - /bin/cp -r karyaseru $DEPLOYPATH
     - /bin/cp -r templates $DEPLOYPATH
