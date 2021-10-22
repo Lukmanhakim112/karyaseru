@@ -10,11 +10,13 @@
 		<meta name="keyword" content="Blog SMK Telkom Bandung, SMK Telkom Bandung, karya seru SMK Telkom Bandung, Karya siswa, showcase, siswa kreatif">
 
         <!-- CSS link -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% block bootstrap %}
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+        {% endblock bootstrap %}
         <link rel="stylesheet" href="{% static 'blog/css/creativity-styles.css' %}">
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
         <link rel="shortcut icon" href="{% static 'blog/img/favicon.png' %}" type="image/x-icon">
 
         <!-- FONT -->

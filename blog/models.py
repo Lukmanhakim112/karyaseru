@@ -45,7 +45,7 @@ class Post(models.Model):
     category = models.ManyToManyField(Category, verbose_name="Kategori")
 
     image = models.ImageField('Gambar/Photo')
-    video = models.URLField('Link Video', null=True, blank=True, help_text="Masukan link video jika ada, untuk disematkan di artikel.")
+    video = models.URLField('Link Video Youtube', null=True, blank=True, help_text="Masukan link video jika ada, untuk disematkan di artikel.")
     v_yt_id = models.CharField(max_length=30, null=True, blank=True)
     content = QuillField(verbose_name="Konten/Tulisan", null=True)
     ig_account = models.CharField('Link Akun Instagram', max_length=100, help_text='Isi dengan link instagram penulis.')
@@ -85,7 +85,8 @@ class Post(models.Model):
         if not self.pk:
             self._generate_slug()
 
-        self.v_yt_id = self._trim_yoututbe_id()
+        if self.video:
+            self.v_yt_id = self._trim_yoututbe_id()
 
         super(Post, self).save(*args, **kwargs)
         # pylint: disable=maybe-no-member

@@ -1,0 +1,135 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+{% block mainpanel %}
+
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-danger text-white mr-2">
+            <i class="mdi mdi-home"></i>
+        </span> Dashboard
+    </h3>
+</div>
+
+{% comment %} <div class="row">
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+            <div class="card-body">
+                <img src="{% static 'dashboard/images/circle.svg' %}" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Total Posting <i
+                        class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h4>
+                <h2 class="mb-5">{{ total_post }} karya</h2>
+                <h6 class="card-text">Total Karya yang Diposting</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-info card-img-holder text-white">
+            <div class="card-body">
+                <img src="{% static 'dashboard/images/circle.svg' %}" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Weekly Orders <i
+                        class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                </h4>
+                <h2 class="mb-5">45,6334</h2>
+                <h6 class="card-text">Decreased by 10%</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-success card-img-holder text-white">
+            <div class="card-body">
+                <img src="{% static 'dashboard/images/circle.svg' %}" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                </h4>
+                <h2 class="mb-5">95,5741</h2>
+                <h6 class="card-text">Increased by 5%</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix">
+                    <h4 class="card-title float-left">Visit And Sales Statistics</h4>
+                    <div id="visit-sale-chart-legend"
+                        class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                </div>
+                <canvas id="visit-sale-chart" class="mt-4"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Traffic Sources</h4>
+                <canvas id="traffic-chart"></canvas>
+                <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Semua Postingan Karya</h4>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Judul Karya </th>
+                                <th> Penulis </th>
+                                <th> Status </th>
+                                <th> Terakhir Update </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td> <a href="{% url 'update-post' post.slug %}">{{ post.title|title }}</a> </td>
+                                <td> {{ post.author|title }} </td>
+                                <td>
+                                    {% if post.verified %}
+                                    <label id="badge-{{ post.id }}" class="badge badge-gradient-success">TERVERIFIKASI</label>
+                                    {% else %}
+                                    <label id="badge-{{ post.id }}" class="badge badge-gradient-dark">TIDAK TERVERIFIKASI</label>
+                                    {% endif %}
+                                </td>
+                                <td> {{ post.updated_at }} </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" type="submit" form="verify-post-{{ post.id }}">Verifikasi</button>
+                                    <button class="btn btn-outline-danger btn-sm" type="submit" form="delete-post-{{ post.id }}">Hapus</button>
+
+                                    <form action="" method="post" class="verify-post" id="verify-post-{{ post.id }}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="slug-post" value="{{ post.slug }}">
+                                    </form>
+
+                                    <form action="{% url 'delete-post' post.slug %}" method="post" id="delete-post-{{ post.id }}">
+                                        {% csrf_token %}
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock mainpanel %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dashboard/js/verify.js' %}"></script>
+{% endblock js %}

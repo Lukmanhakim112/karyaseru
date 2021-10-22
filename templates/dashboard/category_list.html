@@ -1,0 +1,58 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+{% block mainpanel %}
+
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-danger text-white mr-2">
+            <i class="mdi mdi-book-variant"></i>
+        </span> Daftar Kategori
+    </h3>
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Semua Kategori</h4>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nama Kategori </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td> 
+                                    <img src="{{ category.icon.url }}" class="mr-2" alt="image">
+                                    <a href="">{{ category.category|title }}</a> 
+                                </td>
+                                <td>
+                                    <form action="{% url 'delete-category' category.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-danger btn-sm" type="submit">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock mainpanel %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dashboard/js/verify.js' %}"></script>
+{% endblock js %}

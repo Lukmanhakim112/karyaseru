@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'homepage.apps.HomepageConfig',
+    'dashboard.apps.DashboardConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_quill',
@@ -143,3 +144,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # API Keys
 RECAPTCHA_KEY = os.getenv('CAPTCHA_KEY')
+
+# Authentication settings
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/d/'
+LOGOUT_REDIRECT_URL = '/'
