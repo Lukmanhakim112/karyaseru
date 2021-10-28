@@ -39,15 +39,15 @@ class Category(models.Model):
 
 class Post(models.Model):
     verified = models.BooleanField('Terverivikasi', default=False)
-    title = models.CharField('Judul Post (Karya)', max_length=70, db_index=True)
-    author = models.CharField('Penulis', max_length=100)
+    title = models.CharField('Nama Karya', max_length=70, db_index=True)
+    author = models.CharField('Pemilik Karya', max_length=100)
     slug = models.SlugField()
     category = models.ManyToManyField(Category, verbose_name="Kategori")
 
-    image = models.ImageField('Gambar/Photo')
+    image = models.ImageField('Gambar/Cover Karya')
     video = models.URLField('Link Video Youtube', null=True, blank=True, help_text="Masukan link video jika ada, untuk disematkan di artikel.")
     v_yt_id = models.CharField(max_length=30, null=True, blank=True)
-    content = QuillField(verbose_name="Konten/Tulisan", null=True)
+    content = QuillField(verbose_name="Penjelasan Karya", null=True)
     ig_account = models.CharField('Link Akun Instagram', max_length=100, help_text='Isi dengan link instagram penulis.')
 
     updated_at = models.DateField(default=timezone.now)
