@@ -18,6 +18,7 @@ def get_post_by_category(request, category):
     if category == 'all' or category == 'Semua':
         post = Post.objects.filter(verified=True)[:3].values('title', 'author', 'image', 'ig_account', 'category__category', 'slug')
 
+        # need refectoring of this section
         data = []
         data_before = ""
         for p in post:
