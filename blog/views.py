@@ -94,5 +94,5 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # pylint: disable=maybe-no-member
-        context['rand_post'] = self.model.objects.order_by('?')[:5]
+        context['rand_post'] = self.model.objects.filter(verified=True).order_by('?')[:5]
         return context   
