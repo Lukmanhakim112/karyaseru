@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http.response import JsonResponse
-from django.views.generic import DeleteView, ListView, UpdateView
+from django.views.generic import DeleteView, ListView, UpdateView, CreateView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 
 from blog.models import Post, Category
-from blog.forms import PostForm
+from blog.forms import PostForm, CategoryForm
 
 from homepage.models import Homepage
 from homepage.forms import HomepageForms
@@ -80,6 +80,24 @@ class CategoryListView(UserIsAdmin, ListView):
 class CategoryDeleteView(UserIsAdmin, DeleteView):
     model = Category
     success_url = reverse_lazy("all-category")
+
+class CategoryCreateView(UserIsAdmin, CreateView):
+    model = Category
+    form_class = CategoryForm 
+    template_name = "dashboard/category_form.html"
+    success_url = reverse_lazy("all-category")
+
+class UpdateCategoryView(UserIsAdmin, UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = "dashboard/category_form.html"
+    success_url = reverse_lazy("all-category")
+
+class CreatePostView(UserIsAdmin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "dashboard/post_form.html"
+    success_url = reverse_lazy("dashboard")
 
 class UpdatePostView(UserIsAdmin, UpdateView):
     model = Post

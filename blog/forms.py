@@ -9,6 +9,23 @@ from crispy_forms.layout import (
 from .models import Post, Category
 
 
+class CategoryForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Row(
+                Div(Field('icon', css_class='form-control-sm'), css_class="col-12"),
+                Div(Field('category', css_class='form-control-sm'), css_class="col-12"),
+            )
+        )
+
+    class Meta:
+        model = Category
+        fields = ['icon', 'category']
+
+
 class PostForm(forms.ModelForm):
     title = forms.CharField(label="Judul Karya atau Post", help_text="Tuliskan judul yang mudah diingat dan semenarik mungkin.")
 

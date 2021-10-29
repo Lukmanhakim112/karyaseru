@@ -76,7 +76,10 @@
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Semua Postingan Karya</h4>
+                <div class="d-flex justify-content-between mb-3">
+                    <h4 class="card-title">Semua Postingan Karya</h4>
+                    <a href="{% url 'create-post' %}" class="btn btn-danger btn-sm">Tambah Karya</a>
+                </div>
 
                 <div class="table-responsive">
                     <table class="table">

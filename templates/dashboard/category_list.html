@@ -15,7 +15,10 @@
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Semua Kategori</h4>
+                <div class="d-flex justify-content-between mb-3">
+                    <h4 class="card-title">Semua Kategori</h4>
+                    <a href="{% url 'create-category' %}" class="btn btn-danger btn-sm">Tambah Kategori</a>
+                </div>
 
                 <div class="table-responsive">
                     <table class="table">
@@ -34,7 +37,7 @@
                                 </td>
                                 <td> 
                                     <img src="{{ category.icon.url }}" class="mr-2" alt="image">
-                                    <a href="">{{ category.category|title }}</a> 
+                                    <a href="{% url 'update-category' category.pk %}">{{ category.category|title }}</a> 
                                 </td>
                                 <td>
                                     <form action="{% url 'delete-category' category.id %}" method="post">
