@@ -13,13 +13,30 @@ $(document).ready(() => {
                 success: (response) => {
                     let idPost = this.getAttribute("id").split("-")[2];
                     let badge = $(`#badge-${idPost}`); 
+                    let verify = $(`#verify-${idPost}`); 
+                    let verifyButton = $(`#button-verify-${idPost}`); 
 
-                    badge.removeClass('badge-gradient-dark');
-                    badge.addClass('badge-gradient-success');
-                    badge.text("TERVERIFIKASI");
+			if (verify.val() == "True") {
+                    		badge.removeClass('badge-gradient-success');
+				badge.addClass('badge-gradient-dark');
+				badge.text("TIDAK TERVERIFIKASI");
+				verifyButton.text("Verifikasi")
+
+				verify.val("False")
+			} else {
+                    		badge.removeClass('badge-gradient-dark');
+				badge.addClass('badge-gradient-success');
+				badge.text("TERVERIFIKASI");
+				verifyButton.text("Batal Verifikasi")
+
+				verify.val("True")
+			}
+
+
+
                 },
                 error: (response) => {
-                    alert("Error, tidak bisa menemukan post.")
+                    alert(`Error, tidak bisa menemukan post: ${response}`)
                 },
             });
             return false;

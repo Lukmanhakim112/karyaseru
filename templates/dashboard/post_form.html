@@ -36,7 +36,7 @@
             <i class="mdi mdi-border-color"></i>
         </span> 
         {% if object %}
-        Edit Karya -- {{ object.titletegory|title }}
+        Edit Karya -- {{ object.title|title }}
         {% else %}
         Tambah Karya
         {% endif %}
@@ -47,10 +47,14 @@
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
+	    {% if user.is_superuser %}
                <form action="" method="post" enctype="multipart/form-data">
                     {% crispy form %}
                     <button type="submit" class="btn btn btn-gradient-danger">Sumbit Post (Karya)</button>
                </form> 
+	     {% else %}
+                    {% crispy form %}
+	    {% endif %}
             </div>
         </div>
     </div>

@@ -13,14 +13,18 @@ from homepage.models import Homepage
 from homepage.forms import HomepageForms
 
 
+
 class UserIsAdmin(UserPassesTestMixin):
     # pylint: disable=maybe-no-member
 
     def test_func(self):
-        return True if self.request.user.is_staff else False
+        return True if self.request.user.is_superuser else False
 
 def admin_check(user):
     return user.is_staff
+
+def superuser_check(user):
+    return user.is_superuser
 
 @user_passes_test(admin_check)
 def dashboard(request):
@@ -44,15 +48,24 @@ def verify_post(request):
         raise PermissionDenied
 
     try:
-        Post.objects.filter(slug=request.POST.get("slug-post")).update(verified=True)
+        post = Post.objects.filter(slug=request.POST.get("slug-post"))
+
+        if request.POST.get("verify") == "True":
+            post.update(verified=False)
+        else:
+            print("Here")
+            post.update(verified=True)
+
     except Post.DoesNotExist:
         return JsonResponse({"success": False, "message": "Post Not Found!"}, status=404)
 
     return JsonResponse({"success": True})
 
-@user_passes_test(admin_check)
 def edit_homepage(request):
     # pylint: disable=maybe-no-member
+
+    if not request.user.is_superuser:
+        raise PermissionDenied
 
     try:
         home = Homepage.objects.get(pk=1)
@@ -99,11 +112,14 @@ class CreatePostView(UserIsAdmin, CreateView):
     template_name = "dashboard/post_form.html"
     success_url = reverse_lazy("dashboard")
 
-class UpdatePostView(UserIsAdmin, UpdateView):
+class UpdatePostView(UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = "dashboard/post_form.html"
     success_url = reverse_lazy("dashboard")
+
+    def test_func(self):
+        return True if self.request.user.is_staff else False
 
 class DeletePostView(UserIsAdmin, DeleteView):
     model = Post
