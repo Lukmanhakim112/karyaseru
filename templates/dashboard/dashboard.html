@@ -16,11 +16,19 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-3">
-                    <h4 class="card-title">Semua Postingan Karya</h4>
+			<h4 class="card-title">Semua Postingan Karya • {{ total_post }}</h4>
 		    {% if user.is_superuser %}
                     <a href="{% url 'create-post' %}" class="btn btn-danger btn-sm">Tambah Karya</a>
 		    {% endif %}
                 </div>
+		<div>
+
+			<form action="" method="GET">
+			    <div class="input-group my-3">
+				<input type="text" name="search" class="form-control" placeholder="Cari judul karya..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+			    </div>
+			</form>
+		</div>
 
                 <div class="table-responsive">
                     <table class="table">
@@ -29,6 +37,7 @@
                                 <th> # </th>
                                 <th> Judul Karya </th>
                                 <th> Penulis </th>
+                                <th> Kategori </th>
                                 <th> Status </th>
                                 <th> Terakhir Update </th>
                                 <th> Aksi </th>
@@ -42,6 +51,11 @@
                                 </td>
                                 <td> <a href="{% url 'update-post' post.slug %}">{{ post.title|title }}</a> </td>
                                 <td> {{ post.author|title }} </td>
+                                <td> 
+					{% for c in post.category.all %}
+					<label class="badge badge-danger">{{ c|upper }}</label>
+					{% endfor %}
+				</td>
                                 <td>
                                     {% if post.verified %}
                                     <label id="badge-{{ post.id }}" class="badge badge-gradient-success">TERVERIFIKASI</label>

@@ -23,14 +23,16 @@ class UserIsAdmin(UserPassesTestMixin):
 def admin_check(user):
     return user.is_staff
 
-def superuser_check(user):
-    return user.is_superuser
-
 @user_passes_test(admin_check)
 def dashboard(request):
     # pylint: disable=maybe-no-member
 
-    posts = Post.objects.all()
+    key_search = request.GET.get("search") 
+    if key_search:
+        posts = Post.objects.filter(title__icontains=key_search)
+    else:
+        posts = Post.objects.all()
+
     total_post = posts.count()
 
     ctx = {
