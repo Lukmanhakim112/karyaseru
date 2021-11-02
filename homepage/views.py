@@ -27,6 +27,7 @@ def get_post_by_category(request, category):
             if not p.get("title") in data_before:
                 data.append(p)  
                 data_before = p.get("title")
+                counter += 1
             if counter == 3:
                 break;
 
