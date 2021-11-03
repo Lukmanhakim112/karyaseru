@@ -6,7 +6,7 @@ from .models import Homepage
 
 def index(request):
     # pylint: disable=maybe-no-member
-    post = Post.objects.filter(verified=True)[:3]
+    post = Post.objects.filter(verified=True)
     homepage = Homepage.objects.all().first()
     categories = Category.objects.all()
 
@@ -21,15 +21,12 @@ def get_post_by_category(request, category):
         # need refectoring of this section
         data = []
         data_before = ""
-        counter = 0
 
+        # Create unique list of post
         for p in post:
             if not p.get("title") in data_before:
                 data.append(p)  
                 data_before = p.get("title")
-                counter += 1
-            if counter == 3:
-                break;
 
         post = data
 
