@@ -6,7 +6,7 @@ from .models import Homepage
 
 def index(request):
     # pylint: disable=maybe-no-member
-    post = Post.objects.filter(verified=True)
+    post = Post.objects.filter(verified=True).order_by("-updated_at")
     homepage = Homepage.objects.all().first()
     categories = Category.objects.all()
 
@@ -16,7 +16,7 @@ def get_post_by_category(request, category):
 
     # pylint: disable=maybe-no-member
     if category == 'all' or category == 'Semua':
-        post = Post.objects.filter(verified=True).values('title', 'author', 'image','category__category' ,'ig_account', 'slug').distinct()
+        post = Post.objects.filter(verified=True).values('title', 'author', 'image','category__category' ,'ig_account', 'slug').order_by("-updated_at").distinct()
 
         # need refectoring of this section
         data = []

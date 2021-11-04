@@ -42,9 +42,9 @@ class PostList(ListView):
 
     def get_queryset(self):
         if self.request.GET.get('search'):
-            return self.model.objects.filter(title__icontains=self.request.GET['search'], verified=True)
+            return self.model.objects.filter(title__icontains=self.request.GET['search'], verified=True).order_by("-updated_at")
         else:
-            return self.model.objects.filter(verified=True)
+            return self.model.objects.filter(verified=True).order_by("-updated_at")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

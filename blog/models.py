@@ -50,6 +50,10 @@ class Post(models.Model):
     content = QuillField(verbose_name="Penjelasan Karya", null=True)
     ig_account = models.CharField('Link Akun Instagram', max_length=100, help_text='Isi dengan link instagram penulis.')
 
+    document = models.FileField('Karya Tulis Ilmiah', null=True, blank=True,
+            help_text="Isi jika memang karya yang di-unggah adalah karya ilmiah. Berformat pdf",
+            validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+
     updated_at = models.DateField(default=timezone.now)
 
     def __str__(self):

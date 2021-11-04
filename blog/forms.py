@@ -45,7 +45,7 @@ class PostForm(forms.ModelForm):
                 ),
                 Fieldset( "Tuliskan Inspirasi Kamu!", # legend
                     # list of fields
-                    'title', 'image', 'video',
+                    'title', 'image', 'video', 'document',
                     Field('category', css_class='form-control form-control-sm'),
                     'content',
 

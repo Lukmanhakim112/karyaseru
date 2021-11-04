@@ -43,6 +43,12 @@
             {{ post.content.html|safe }}
         </div>
 
+	{% if post.document %}
+        <div class="mt-5 ratio ratio-4x3">
+		<iframe class="w-100" src="{{ post.document.url }}#toolbar=0" ></iframe>
+        </div>
+	{% endif %}
+
 	{% if post.v_yt_id %}
         <div class="mt-5 ratio ratio-16x9">
             <iframe class="" src="https://www.youtube.com/embed/{{ post.v_yt_id }}" allowfullscreen></iframe>
