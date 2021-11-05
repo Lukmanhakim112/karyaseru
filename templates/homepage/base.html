@@ -6,8 +6,8 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Blog karya dari siswa SMK Telkom Bandung">
-		<meta name="keyword" content="Blog SMK Telkom Bandung, SMK Telkom Bandung, karya seru SMK Telkom Bandung, Karya siswa, showcase, siswa kreatif">
+	<meta name="description" content="Blog karya dari siswa SMK Telkom Bandung">
+	<meta name="keyword" content="Blog SMK Telkom Bandung, SMK Telkom Bandung, karya seru SMK Telkom Bandung, Karya siswa, showcase, siswa kreatif">
 
         <!-- CSS link -->
         {% block bootstrap %}
@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{% static 'blog/css/creativity-styles.css' %}">
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="{% static 'blog/css/glide.min.css' %}">
         <link rel="shortcut icon" href="{% static 'blog/img/favicon.png' %}" type="image/x-icon">
 
         <!-- FONT -->
@@ -135,8 +136,9 @@ Guiding the Generation Supporting Enhancement of Nation's Competitiveness. Berdi
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     {% block js %}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{% static 'blog/js/main.js' %}"></script>
+    <script src="{% static 'blog/js/glide.min.js' %}"></script>
     <script src="{% static 'blog/js/getData.js' %}"></script>
+    <script src="{% static 'blog/js/main.js' %}"></script>
     {% endblock js %}
 </body>
 </html>
