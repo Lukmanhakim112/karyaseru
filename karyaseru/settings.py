@@ -146,6 +146,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 RECAPTCHA_KEY = os.getenv('CAPTCHA_KEY')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 # Authentication settings
 LOGIN_URL = '/login/'
