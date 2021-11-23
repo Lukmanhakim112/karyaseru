@@ -82,7 +82,7 @@ class Post(models.Model):
         except KeyError:
             # pylint: disable=maybe-no-member
             url = video_url.split("/")
-            return url[3]
+            return url[len(url) - 1]
 
 
     def save(self, *args, **kwargs):
