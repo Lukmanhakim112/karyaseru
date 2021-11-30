@@ -1,3 +1,4 @@
+from django.db.models import fields
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http.response import JsonResponse
@@ -6,12 +7,16 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 
-from blog.models import Post, Category
-from blog.forms import PostForm, CategoryForm
+from .forms import PostFormDashboard
+
+from blog.models import Post, Category, Author
+from blog.forms import (
+    PostForm, CategoryForm,
+    AuthorFormset, AuthorFormSetHelper
+)
 
 from homepage.models import Homepage
 from homepage.forms import HomepageForms
-
 
 
 class UserIsAdmin(UserPassesTestMixin):
@@ -43,6 +48,53 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.html", ctx)
 
 @user_passes_test(admin_check)
+def post_create(request):
+
+    author_form = AuthorFormset()
+    post_form = PostForm()
+
+    if request.method == 'POST':
+
+        author_form = AuthorFormset(request.POST)
+        post_form = PostForm(request.POST, request.FILES)
+
+        if post_form.is_valid() and author_form.is_valid():
+
+            # TODO: Refactor this section
+            # create author object if does not exsist
+            # retrive otherwise
+            authors_list = []
+            for author in author_form:
+                obj = Author.objects.get_or_create(
+                    ig_account=author.cleaned_data.get('ig_account'),
+                    defaults={
+                        'full_name': author.cleaned_data.get('full_name'),
+                        'ig_account': author.cleaned_data.get('ig_account')
+                    }
+                )
+                authors_list.append(obj[0])
+
+            post = post_form.save()
+            # Set author
+            post.author.set(authors_list)
+
+            # Mark for seeing the success page
+            request.session['success_post'] = True
+            request.session.set_expiry(60)
+
+            return redirect('dashboard')
+
+
+    context = {
+        'author_form_helper': AuthorFormSetHelper(),
+        'author_form': author_form,
+        'post_form': post_form,
+    }
+
+    return render(request, 'dashboard/post_form.html', context)
+
+
+@user_passes_test(admin_check)
 def verify_post(request):
     # pylint: disable=maybe-no-member
 
@@ -55,7 +107,6 @@ def verify_post(request):
         if request.POST.get("verify") == "True":
             post.update(verified=False)
         else:
-            print("Here")
             post.update(verified=True)
 
     except Post.DoesNotExist:
@@ -86,6 +137,26 @@ def edit_homepage(request):
     form.save()
     return redirect("homepage-edit")
 
+class AuthorListView(UserIsAdmin, ListView):
+    model = Author
+    template_name = "dashboard/author_list.html"
+    context_object_name = "authors"
+
+class AuthorDeleteView(UserIsAdmin, DeleteView):
+    model = Author
+    success_url = reverse_lazy('all-author')
+
+class AuthorUpdateView(UserIsAdmin, UpdateView):
+    model = Author
+    fields = '__all__'
+    template_name = "dashboard/author_form.html"
+    success_url = reverse_lazy("all-author")
+
+class AuthorCreateView(UserIsAdmin, CreateView):
+    model = Author
+    fields = '__all__'
+    template_name = 'dashboard/author_form.html'
+    success_url = reverse_lazy("all-author")
 
 class CategoryListView(UserIsAdmin, ListView):
     model = Category
@@ -116,8 +187,8 @@ class CreatePostView(UserIsAdmin, CreateView):
 
 class UpdatePostView(UserPassesTestMixin, UpdateView):
     model = Post
-    form_class = PostForm
-    template_name = "dashboard/post_form.html"
+    form_class = PostFormDashboard
+    template_name = "dashboard/post_form_update.html"
     success_url = reverse_lazy("dashboard")
 
     def test_func(self):

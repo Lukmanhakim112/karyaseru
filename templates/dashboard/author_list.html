@@ -1,0 +1,64 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+{% block mainpanel %}
+
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-danger text-white mr-2">
+            <i class="mdi mdi-account-multiple"></i>
+        </span> Daftar Author (Penulis)
+    </h3>
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <h4 class="card-title">Semua Author (Penulis)</h4>
+                    <a href="{% url 'create-author' %}" class="btn btn-danger btn-sm">Tambah Author (Penulis)</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nama Lengkap </th>
+                                <th> Username Instagram </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for author in authors %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td> 
+                                    <a href="{% url 'update-author' author.pk %}">{{ author.full_name|title }}</a> 
+                                </td>
+                                <td>
+                                    <a href="https://www.instagram.com/{{ author.ig_account }}">{{ author.ig_account }}</a> 
+                                </td>
+                                <td>
+                                    <form action="{% url 'delete-author' author.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-danger btn-sm" type="submit">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock mainpanel %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'dashboard/js/verify.js' %}"></script>
+{% endblock js %}
