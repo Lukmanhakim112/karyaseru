@@ -47,14 +47,14 @@
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-	    {% if user.is_superuser %}
-               <form action="" method="post" enctype="multipart/form-data">
-                    {% crispy form %}
-                    <button type="submit" class="btn btn btn-gradient-danger">Sumbit Post (Karya)</button>
-               </form> 
-	     {% else %}
-                    {% crispy form %}
-	    {% endif %}
+                {% if user.is_superuser %}
+                       <form action="" method="post" enctype="multipart/form-data">
+                            {% crispy form %}
+                            <button type="submit" class="btn btn btn-gradient-danger">Sumbit Post (Karya)</button>
+                       </form> 
+                 {% else %}
+                            {% crispy form %}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -13,10 +13,11 @@ def index(request):
     return render(request, 'homepage/index.html', {'post': post, 'homepage': homepage, 'categories': categories})
 
 def get_post_by_category(request, category):
+    post = Post.objects.filter(verified=True).values('title', 'author__full_name', 'author__ig_account','image','category__category' , 'slug')
 
     # pylint: disable=maybe-no-member
     if category == 'all' or category == 'Semua':
-        post = Post.objects.filter(verified=True).values('title', 'author', 'image','category__category' ,'ig_account', 'slug').order_by("-updated_at").distinct()
+        post.order_by("-updated_at").distinct()
 
         # need refectoring of this section
         data = []
@@ -32,7 +33,6 @@ def get_post_by_category(request, category):
 
     elif category:
         cate = get_object_or_404(Category, slug=category)
-        post = list(Post.objects.filter(category=cate, verified=True)[:3]
-                .values('title', 'author', 'image', 'ig_account', 'category__category', 'slug'))
+        post = list(post.filter(category=cate)[:3])
 
     return JsonResponse({'post': post})

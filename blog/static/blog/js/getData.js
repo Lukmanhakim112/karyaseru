@@ -57,7 +57,7 @@ function displayError(error){
 }
 
 // === COMPONENT === //
-function cardComponent({title, author, category__category, image, ig_account, slug}){
+function cardComponent({title, author__full_name, category__category, image, ig_account, slug}){
     return `<div class="col-lg-4 col-md-6 my-4 card-karya-wrapper">
     <div class=" border rounded-xl px-3 py-4 ">
         <div class="img-cover">
@@ -70,7 +70,7 @@ function cardComponent({title, author, category__category, image, ig_account, sl
             <p class="paragraf fs-6 mb-2">${category__category}</p>
 
             <div class="d-flex justify-content-between my-3">
-                <p class="fw-bold">By. ${author}</p>
+                <p class="fw-bold">By. ${author__full_name.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
                 <div>
                     <a href="${ig_account}"><img src="${window.location.origin}/static/blog/img/icon/ig.svg" class="sosmed-icon mx-1" alt=""></a>
                 </div>

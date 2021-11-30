@@ -50,12 +50,16 @@
                                     {{ forloop.counter }}
                                 </td>
                                 <td> <a href="{% url 'update-post' post.slug %}">{{ post.title|title }}</a> </td>
-                                <td> {{ post.author|title }} </td>
                                 <td> 
-					{% for c in post.category.all %}
-					<label class="badge badge-danger">{{ c|upper }}</label>
-					{% endfor %}
-				</td>
+                                    {% for author in post.author.all %}
+                                        <label class="badge badge-danger">{{ author.full_name|title }}</label>
+                                    {% endfor %}
+                                </td>
+                                <td> 
+                                    {% for c in post.category.all %}
+                                    <label class="badge badge-danger">{{ c|upper }}</label>
+                                    {% endfor %}
+				                </td>
                                 <td>
                                     {% if post.verified %}
                                     <label id="badge-{{ post.id }}" class="badge badge-gradient-success">TERVERIFIKASI</label>

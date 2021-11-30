@@ -56,7 +56,7 @@ class PostForm(forms.ModelForm):
         self.helper = FormHelper(self)
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Row(
+            Div(
                 # list of fields
                 'title', 'image', 'video', 'document',
                 Field('category', css_class='form-control form-control-sm'),

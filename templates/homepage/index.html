@@ -80,7 +80,7 @@
         <div class="wrapper-kategori" data-aos="fade-up">
             <span class="kategori filter-active" data-filter="all">Semua</span>
             {% for category in categories %}
-            <span class="kategori" data-filter="{{ category.slug }}">{{ category.category }}</span>
+                <span class="kategori" data-filter="{{ category.slug }}">{{ category.category }}</span>
             {% endfor %}
         </div>
 
@@ -99,9 +99,9 @@
                         <p class="paragraf fs-6 mb-2">{{ p.category.all.first }}</p>
 
                         <div class="d-flex justify-content-between my-3">
-                            <p class="fw-bold">By. {{ p.author }}</p>
+                            <p class="fw-bold">By. {{ p.author.all.first.full_name|title }}</p>
                             <div>
-                                <a href="{{ p.ig_account }}"><img src="{% static 'blog/img/icon/ig.svg' %}"
+                                <a href="https://www.instagram.com/{{ p.author.all.first.ig_account }}"><img src="{% static 'blog/img/icon/ig.svg' %}"
                                         class="sosmed-icon mx-1" alt=""></a>
                             </div>
                         </div>
