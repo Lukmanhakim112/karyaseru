@@ -1,3 +1,4 @@
+from enum import unique
 import itertools
 from urllib.parse import urlparse, parse_qs
 
@@ -37,10 +38,20 @@ class Category(models.Model):
             self._generate_slug()
         super(Category, self).save(*args, **kwargs)
 
+class Author(models.Model):
+    full_name = models.CharField('Nama Lengkap', max_length=100, db_index=True)
+    ig_account = models.CharField(
+        'Username Instagram', max_length=100, unique=True, db_index=True,
+        help_text="Masukan username instagram kalian (tanpa @)"
+    )
+
+    def __str__(self):
+        return self.full_name
+
 class Post(models.Model):
     verified = models.BooleanField('Terverivikasi', default=False)
     title = models.CharField('Nama Karya', max_length=70, db_index=True)
-    author = models.CharField('Pemilik Karya', max_length=100)
+    author = models.ManyToManyField(Author, verbose_name="Pemilik Karya")
     slug = models.SlugField()
     category = models.ManyToManyField(Category, verbose_name="Kategori")
 
@@ -48,7 +59,6 @@ class Post(models.Model):
     video = models.URLField('Link Video Youtube', null=True, blank=True, help_text="Masukan link video jika ada, untuk disematkan di artikel.")
     v_yt_id = models.CharField(max_length=30, null=True, blank=True)
     content = QuillField(verbose_name="Penjelasan Karya", null=True)
-    ig_account = models.CharField('Link Akun Instagram', max_length=100, help_text='Isi dengan link instagram penulis.')
 
     document = models.FileField('Karya Tulis Ilmiah', null=True, blank=True,
             help_text="Isi jika memang karya yang di-unggah adalah karya ilmiah. Berformat pdf",

@@ -26,13 +26,16 @@
         color: inherit;
         white-space: normal;
      }
+    body {
+        background: #EFE4DA;
+    }
     </style>
 {% endblock style %}
 {% block main %}
     <section class="mx-5 mt-3 mb-5 p-1">
 
         <div class="row">
-            <div class="col-12 m-2 border rounded p-3">
+            <div class="col-12 m-2 border border-light rounded p-3">
                 <img class="img-fluid" src="{% static 'blog/img/logo-nav.png' %}" alt="Logo smk telkom bandung" />
                 <blockquote class="blockquote mt-3">
                 <p class="h4">Bagikan Karyamu, dan Berikan Inspirasi Bagi Semua.</p>
@@ -41,12 +44,45 @@
         </div>
 
         <form method="POST" enctype="multipart/form-data" action="">
-            {% crispy form %}
+            <div class="card shadow-sm my-3">
+                <div class="card-header">
+                    Pembuat Pos atau Karya
+                </div>
+                <div class="card-body">
+                    {% crispy author_form author_form_helper %}
+
+                    <div class="">
+                        <button type="button" id="add-author" class="ms-3 btn btn-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 bi bi-person-plus-fill" viewBox="0 0 16 16">
+                              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            Tambah Author
+                        </button>
+                        <button id="remove-author" type="button" class="btn btn-outline-secondary">
+                            Kurangi Author
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card shadow-sm my-3">
+                <div class="card-header">
+                    Menulis Pos atau Karya
+                </div>
+                <div class="card-body">
+                {% crispy post_form %}
+                </div>
+
+            </div>
         </form>
     </section>
 {% endblock main %}
 {% block js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'blog/js/addAuthor.js' %}" type="text/javascript"></script>
     <script type="text/javascript">
         $('.selectmultiple').selectpicker();
     </script>
