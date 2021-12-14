@@ -26,7 +26,9 @@
                     </a></h2>
                     <ul class="list-inline">
                         <li class="list-inline-item"><span class="text-muted">by:</span>
-                            <a class="link-danger text-decoration-none" href="{% url 'post-author' post.author %}">{{ post.author|title  }}</a>
+                            {% for author in post.author.all %}
+                            <a class="link-danger text-decoration-none" href="{% url 'post-author' author %}">{{ author|title  }}</a>
+                            {% endfor %}
                         </li>
                         {% comment %} <li class="list-inline-item text-muted">&bull;</li> {% endcomment %}
                         <li class="list-inline-item text-muted">
