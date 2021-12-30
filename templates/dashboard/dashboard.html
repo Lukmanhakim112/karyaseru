@@ -1,5 +1,9 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static %}
+{% block style %}
+	{{ block.super }}
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+{% endblock %}
 {% block mainpanel %}
 
 
@@ -23,15 +27,11 @@
                 </div>
 		<div>
 
-			<form action="" method="GET">
-			    <div class="input-group my-3">
-				<input type="text" name="search" class="form-control" placeholder="Cari judul karya..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-			    </div>
-			</form>
 		</div>
 
-                <div class="table-responsive">
-                    <table class="table">
+				<hr>
+                <div class="table-responsive my-3">
+                    <table class="table" id="data-table">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -96,6 +96,7 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
@@ -104,4 +105,10 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'dashboard/js/verify.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	<script type="text/javascript">
+		$('#data-table').DataTable();
+
+	</script>
 {% endblock js %}
